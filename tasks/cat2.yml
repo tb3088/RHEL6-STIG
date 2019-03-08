@@ -2113,7 +2113,7 @@
 - name: "MEDIUM | V-51363 | PATCH | The system must use a Linux Security Module configured to enforce limits on system services."
   selinux:
       conf: /etc/selinux/config
-      policy: "{{ rhel6stig_selinux_pol }}"
+      policy: "{{ selinux_policy }}"
       state: enforcing
   tags:
       - cat2

@@ -1,41 +1,41 @@
 - name: Check OS version and family
   assert:
-      that: ansible_os_family == 'RedHat' and ansible_distribution_major_version | version_compare('6', '==')
-      msg: "This role can only be run against RHEL/CENTOS 6. {{ ansible_distribution }} {{ ansible_distribution_major_version }} is not supported."
+    that: ansible_os_family == 'RedHat' and ansible_distribution_major_version is version_compare('6', '==')
+    msg: "This role can only be run against RHEL/CENTOS 6. {{ ansible_distribution }} {{ ansible_distribution_major_version }} is not supported."
   tags:
-      - always
+    - always
 
 - name: Check ansible version
   assert:
-      that: ansible_version.full | version_compare(rhel6stig_min_ansible_version, '>=')
-      msg: You must use Ansible {{ rhel6stig_min_ansible_version }} or greater
+    that: ansible_version.full | version_compare(min_ansible_version, '>=')
+    msg: You must use Ansible {{ min_ansible_version }} or greater
   tags:
-      - always
+    - always
 
 - import_tasks: prelim.yml
   become: yes
   tags:
-      - prelim_tasks
-      - always
+    - prelim_tasks
+    - always
 
 - include_tasks: cat1.yml
-  when: rhel6stig_cat1 | bool
+  when: apply_cat1 | bool
   tags:
-      - cat1
-      - high
+    - cat1
+    - high
 
 - include_tasks: cat2.yml
-  when: rhel6stig_cat2 | bool
+  when: apply_cat2 | bool
   tags:
-      - cat2
-      - medium
+    - cat2
+    - medium
 
 - include_tasks: cat3.yml
-  when: rhel6stig_cat3 | bool
+  when: apply_cat3 | bool
   tags:
-      - cat3
-      - low
+    - cat3
+    - low
 
 - import_tasks: post.yml
   tags:
-      - post_tasks
+    - post_tasks

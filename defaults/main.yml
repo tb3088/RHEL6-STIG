@@ -1,9 +1,9 @@
-rhel6stig_min_ansible_version: 2.3
+min_ansible_version: 2.3
 
 # Enable or disable remediation for each category
-rhel6stig_cat1: yes
-rhel6stig_cat2: no
-rhel6stig_cat3: no
+apply_cat1: yes
+apply_cat2: no
+apply_cat3: no
 
 # workarounds for benchmarks that don't exactly match the STIG
 rhel6stig_workaround_for_ssg_benchmark: true
@@ -20,7 +20,7 @@ rhel6stig_pam_auth_sufficient: pam_unix.so try_first_pass
 rhel6stig_pam_cracklib_params: try_first_pass retry=3 maxrepeat=3 minlen={{ rhel6stig_pass_min_length }} dcredit=-1 ucredit=-1 ocredit=-1 lcredit=-1 difok=8
 
 # SELinux settings
-rhel6stig_selinux_pol: targeted
+selinux_policy: targeted
 
 # GPG Key locations
 # These are the standard URL locations for GPG keys for RH and Cent.
